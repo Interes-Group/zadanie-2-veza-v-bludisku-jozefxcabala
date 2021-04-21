@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MazeCell extends JPanel {
-    @Getter @Setter boolean start;
     @Getter @Setter boolean finish;
     @Getter @Setter boolean player;
     @Getter @Setter private boolean passable;
@@ -16,7 +15,6 @@ public class MazeCell extends JPanel {
     public MazeCell(){
         setPassable(false);
         setFather(null);
-        setStart(false);
         setFinish(false);
         setPlayer(false);
     }

@@ -1,6 +1,7 @@
 package sk.stuba.fei.uim.oop;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,10 +12,12 @@ public class Maze extends JPanel {
     private final Border line;
     @Getter private final JPanel mazePanel;
     @Getter private final MazeCreation maze;
+    @Getter private Point actualPosition;
 
     public Maze(){
         this.maze = new MazeCreation(13,13);
 
+        this.actualPosition = new Point();
         this.mazePanel = new JPanel();
         this.mazePanel.setLayout(new GridLayout(this.maze.getRow()+2,this.maze.getCol()+2));
         this.line = new LineBorder(Color.BLACK, 1, false);
@@ -27,7 +30,8 @@ public class Maze extends JPanel {
         for(int i = 1; i < this.maze.getRow() + 1; i++){
             for(int j = 1; j < this.maze.getCol() + 1; j++){
                 if(this.maze.getMaze()[i][j].isPassable()){
-                    this.maze.getMaze()[i][j].setStart(true);
+                    this.maze.getMaze()[i][j].setPlayer(true);
+                    this.actualPosition.setLocation(i,j);
                     return;
                 }
             }
@@ -50,7 +54,7 @@ public class Maze extends JPanel {
             for (int j = 0; j < this.maze.getCol() + 2; ++j) {
                 this.maze.getMaze()[i][j].setBorder(this.line);
                 if (this.maze.getMaze()[i][j].isPassable()) {
-                    if(this.maze.getMaze()[i][j].isStart())
+                    if(this.maze.getMaze()[i][j].isPlayer())
                         this.maze.getMaze()[i][j].setBackground(Color.green);
                     else if(this.maze.getMaze()[i][j].isFinish())
                         this.maze.getMaze()[i][j].setBackground(Color.red);

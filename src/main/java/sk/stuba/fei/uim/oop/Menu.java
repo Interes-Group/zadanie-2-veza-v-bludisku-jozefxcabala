@@ -5,14 +5,11 @@ import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Menu extends JPanel {
-    @Getter @Setter private MoveButton up;
-    @Getter @Setter private MoveButton down;
-    @Getter @Setter private MoveButton right;
-    @Getter @Setter private MoveButton left;
-    @Getter @Setter private ResetButton reset;
-    @Getter private JPanel menu;
+    @Getter private final ArrayList<MyButton> buttons;
+    @Getter private final JPanel menu;
     @Getter @Setter private JLabel counter;
 
     public Menu(){
@@ -22,19 +19,19 @@ public class Menu extends JPanel {
         this.counter = new JLabel("Counter: 0");
         this.menu.add(this.counter);
 
-        this.up = new MoveButton("up");
-        this.menu.add(this.up);
+        this.buttons = new ArrayList<>();
+        this.buttons.add(new UpButton("up"));
+        this.buttons.add(new ResetButton("reset"));
+        this.buttons.add(new LeftButton("left"));
+        this.buttons.add(new DownButton("down"));
+        this.buttons.add(new RightButton("right"));
 
-        this.reset = new ResetButton("reset");
-        this.menu.add(this.reset);
+        createMenu();
+    }
 
-        this.left = new MoveButton("left");
-        this.menu.add(this.left);
-
-        this.down = new MoveButton("down");
-        this.menu.add(this.down);
-
-        this.right = new MoveButton("right");
-        this.menu.add(this.right);
+    private void createMenu(){
+        for (MyButton button : this.buttons) {
+            this.menu.add(button);
+        }
     }
 }
