@@ -18,12 +18,49 @@ public class MazeCreation {
         this.maze = new MazeCell[getRow()+2][getCol()+2];
         createMazeCells();
         createMaze();
+        findPossibleRoutes();
     }
 
     private void createMazeCells(){
         for (int i = 0; i < getRow() + 2; ++i)
-            for (int j = 0; j < getCol() + 2; ++j)
+            for (int j = 0; j < getCol() + 2; ++j) {
                 this.maze[i][j] = new MazeCell();
+                this.maze[i][j].getCoordination().setLocation(i,j);
+            }
+
+
+    }
+
+    private void findPossibleRoutes(){
+        int k = 0;
+        for(int i = 1; i < this.row + 1; i++){
+            for(int j = 1; j < this.col + 1; j++){
+                k = 0;
+                while(this.maze[i+k][j].isPassable()){
+                    k++;
+                    if(this.maze[i+k][j].isPassable())
+                        this.maze[i][j].getPossibleRoutes().add(this.maze[i+k][j]);
+                }
+                k = 0;
+                while(this.maze[i-k][j].isPassable()){
+                    k++;
+                    if(this.maze[i-k][j].isPassable())
+                        this.maze[i][j].getPossibleRoutes().add(this.maze[i-k][j]);
+                }
+                k = 0;
+                while(this.maze[i][j+k].isPassable()){
+                    k++;
+                    if(this.maze[i][j+k].isPassable())
+                        this.maze[i][j].getPossibleRoutes().add(this.maze[i][j+k]);
+                }
+                k = 0;
+                while(this.maze[i][j-k].isPassable()){
+                    k++;
+                    if(this.maze[i][j-k].isPassable())
+                        this.maze[i][j].getPossibleRoutes().add(this.maze[i][j-k]);
+                }
+            }
+        }
     }
 
     private void createMaze(){

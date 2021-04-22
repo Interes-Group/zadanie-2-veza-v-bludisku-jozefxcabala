@@ -2,84 +2,35 @@ package sk.stuba.fei.uim.oop;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Game extends JFrame {
+public class Game extends JFrame{
     private Maze maze;
     private Menu menu;
+
+    private KeyMoveListener keyMove;
 
     public Game(){
         super("Maze Game");
         setLayout(new GridLayout(2,1));
         setSize(500,500);
 
-        this.menu = new Menu();
-        this.add(this.menu.getMenu());
-
         this.maze = new Maze();
+
+        this.menu = new Menu(this.maze);
+        this.maze.setMenu(this.menu);
+
+        this.add(this.menu.getMenu());
         this.add(this.maze.getMazePanel());
+
         this.maze.showMaze();
+
+        this.keyMove = new KeyMoveListener(this.menu);
+        addKeyListener(this.keyMove);
 
         pack();
         setVisible(true);
-
-        game();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-    private void game(){
-        while(true){
-            movingByButton();
-        }
-    }
-
-    private void movingByButton(){
-        for(int i = 0; i < this.menu.getButtons().size(); i++){
-            if(this.menu.getButtons().get(i).isUsed()){
-                this.menu.getButtons().get(i).setUsed(false);
-                checkMove(this.menu.getButtons().get(i));
-                this.maze.showMaze();
-                break;
-            }
-        }
-    }
-
-    private void checkMove(MyButton button){
-        Point actualPoisition = this.maze.getActualPosition();
-        int x = actualPoisition.x;
-        int y = actualPoisition.y;
-        MazeCell[][] maze = this.maze.getMaze().getMaze();
-
-        switch (button.getActionCommand()) {
-            case "up":
-                if (maze[x - 1 ][y].isPassable()){
-                    maze[x][y].setPlayer(false);
-                    this.maze.getActualPosition().setLocation(x - 1, y);
-                    maze[x - 1][y].setPlayer(true);
-                }
-                break;
-            case "left":
-                if (maze[x][y - 1].isPassable()) {
-                    maze[x][y].setPlayer(false);
-                    this.maze.getActualPosition().setLocation(x, y - 1);
-                    maze[x][y - 1].setPlayer(true);
-                }
-                break;
-            case "down":
-                if (maze[x + 1][y].isPassable()) {
-                    maze[x][y].setPlayer(false);
-                    this.maze.getActualPosition().setLocation(x + 1, y);
-                    maze[x + 1][y].setPlayer(true);
-                }
-                break;
-            case "right":
-                if (maze[x][y + 1].isPassable()) {
-                    maze[x][y].setPlayer(false);
-                    this.maze.getActualPosition().setLocation(x, y + 1);
-                    maze[x][y + 1].setPlayer(true);
-                }
-                break;
-        }
-
-    }
-
-
 }

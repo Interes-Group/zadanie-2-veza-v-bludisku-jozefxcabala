@@ -10,28 +10,40 @@ import java.util.ArrayList;
 public class Menu extends JPanel {
     @Getter private final ArrayList<MyButton> buttons;
     @Getter private final JPanel menu;
-    @Getter @Setter private JLabel counter;
+    @Getter private CounterLabel counterLabel;
 
-    public Menu(){
+
+    public Menu(Maze maze){
         this.menu = new JPanel();
         this.menu.setLayout(new GridLayout(2,3));
 
-        this.counter = new JLabel("Counter: 0");
-        this.menu.add(this.counter);
+        this.counterLabel = new CounterLabel();
+        this.menu.add(this.counterLabel);
 
         this.buttons = new ArrayList<>();
-        this.buttons.add(new UpButton("up"));
-        this.buttons.add(new ResetButton("reset"));
-        this.buttons.add(new LeftButton("left"));
-        this.buttons.add(new DownButton("down"));
-        this.buttons.add(new RightButton("right"));
+        this.buttons.add(new UpButton("up", maze));
+        this.buttons.add(new ResetButton("reset", maze, this.counterLabel));
+        this.buttons.add(new LeftButton("left", maze));
+        this.buttons.add(new DownButton("down", maze));
+        this.buttons.add(new RightButton("right", maze));
 
         createMenu();
+
+        setFocusable(false);
     }
 
     private void createMenu(){
         for (MyButton button : this.buttons) {
             this.menu.add(button);
         }
+    }
+
+    public MyButton getButtonByCommand(String command){
+        for (MyButton button : this.buttons) {
+            if (button.getActionCommand().equals(command))
+                return button;
+        }
+
+        return null;
     }
 }
