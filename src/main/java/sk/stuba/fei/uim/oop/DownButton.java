@@ -1,8 +1,5 @@
 package sk.stuba.fei.uim.oop;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 

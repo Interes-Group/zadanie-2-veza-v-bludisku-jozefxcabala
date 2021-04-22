@@ -1,8 +1,6 @@
 package sk.stuba.fei.uim.oop;
 
 import lombok.Getter;
-import lombok.Setter;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

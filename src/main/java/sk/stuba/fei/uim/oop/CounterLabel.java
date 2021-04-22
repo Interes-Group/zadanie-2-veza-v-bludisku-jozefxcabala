@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class CounterLabel extends JLabel {
     @Getter @Setter private int counter;
-    @Getter private String labelString;
+    @Getter private final String labelString;
 
     public CounterLabel(){
         this.counter = 0;
