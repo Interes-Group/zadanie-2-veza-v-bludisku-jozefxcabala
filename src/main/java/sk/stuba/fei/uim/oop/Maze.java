@@ -7,26 +7,26 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class Maze extends JPanel{
+    private final int row;
+    private final int col;
     private final Border line;
     @Getter private final JPanel mazePanel;
     @Getter private MazeCreation maze;
-    @Getter @Setter private boolean win;
-    @Getter private Point actualPosition;
+    @Getter private final Point actualPosition;
     @Getter @Setter Menu menu;
     @Getter @Setter private boolean reset;
     @Getter @Setter private boolean playerPressed;
 
-    public Maze(){
+    public Maze(int row, int col){
         this.actualPosition = new Point();
         this.mazePanel = new JPanel();
-        createMaze(13,13);
+        this.row = row;
+        this.col = col;
+        createMaze(this.row,this.col);
         this.mazePanel.setLayout(new GridLayout(this.maze.getRow()+2,this.maze.getCol()+2));
         this.line = new LineBorder(Color.BLACK, 1, false);
-        this.win = false;
         this.reset = false;
     }
 
@@ -46,7 +46,6 @@ public class Maze extends JPanel{
         setEntrance();
         setExit();
         findActualPosition();
-        this.win = false;
         this.mazePanel.revalidate();
     }
 
@@ -89,7 +88,7 @@ public class Maze extends JPanel{
         else
             this.reset = false;
 
-        createMaze(13, 13);
+        createMaze(this.row, this.col);
         showMaze();
     }
 

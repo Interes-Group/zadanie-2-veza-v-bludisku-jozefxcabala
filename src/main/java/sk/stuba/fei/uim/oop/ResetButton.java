@@ -1,14 +1,9 @@
 package sk.stuba.fei.uim.oop;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ResetButton extends MyButton {
-    private CounterLabel counterLabel;
+    private final CounterLabel counterLabel;
 
     public ResetButton(String name, Maze maze, CounterLabel counterLabel){
         super(name, maze);

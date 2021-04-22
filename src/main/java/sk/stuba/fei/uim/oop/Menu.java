@@ -1,8 +1,6 @@
 package sk.stuba.fei.uim.oop;
 
 import lombok.Getter;
-import lombok.Setter;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 public class Menu extends JPanel {
     @Getter private final ArrayList<MyButton> buttons;
     @Getter private final JPanel menu;
-    @Getter private CounterLabel counterLabel;
+    @Getter private final CounterLabel counterLabel;
 
 
     public Menu(Maze maze){
@@ -28,7 +26,6 @@ public class Menu extends JPanel {
         this.buttons.add(new RightButton("right", maze));
 
         createMenu();
-
         setFocusable(false);
     }
 
@@ -43,7 +40,6 @@ public class Menu extends JPanel {
             if (button.getActionCommand().equals(command))
                 return button;
         }
-
         return null;
     }
 }

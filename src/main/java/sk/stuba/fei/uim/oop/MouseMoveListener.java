@@ -46,7 +46,6 @@ public class MouseMoveListener implements MouseListener {
             MazeCell panelPressed = (MazeCell) source;
             if(checkPlayer(panelPressed))
                 panelPressed.setBackground(Color.yellow);
-
         }
     }
 
@@ -55,8 +54,10 @@ public class MouseMoveListener implements MouseListener {
         Object source = e.getSource();
         if(source instanceof MazeCell){
             MazeCell panelPressed = (MazeCell) source;
-            if(panelPressed.isPassable() && checkPlayer(panelPressed))
+            if(panelPressed.isPassable() && checkPlayer(panelPressed) && !panelPressed.isFinish())
                 panelPressed.setBackground(Color.white);
+            else if(panelPressed.isFinish())
+                panelPressed.setBackground(Color.red);
 
         }
     }
@@ -71,11 +72,9 @@ public class MouseMoveListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        //System.out.println("pressed");
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        //System.out.println("released");
     }
 }

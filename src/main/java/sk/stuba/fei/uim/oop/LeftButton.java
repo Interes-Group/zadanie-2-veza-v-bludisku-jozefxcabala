@@ -12,9 +12,9 @@ public class LeftButton extends MyButton{
     @Override
     public void actionPerformed(ActionEvent e) {
         this.maze.findActualPosition();
-        Point actualPoisition = this.maze.getActualPosition();
-        int x = actualPoisition.x;
-        int y = actualPoisition.y;
+        Point actualPosition = this.maze.getActualPosition();
+        int x = actualPosition.x;
+        int y = actualPosition.y;
         MazeCell[][] maze = this.maze.getMaze().getMaze();
         maze[x][y].setPressed(false);
         System.out.println("You pressed Left button!");

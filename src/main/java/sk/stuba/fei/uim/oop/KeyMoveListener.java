@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyMoveListener implements KeyListener {
-    private Menu menu;
+    private final Menu menu;
 
     public KeyMoveListener(Menu menu){
         this.menu = menu;
