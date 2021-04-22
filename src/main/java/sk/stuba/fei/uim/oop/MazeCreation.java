@@ -10,18 +10,18 @@ public class MazeCreation{
     @Getter private final int row;
     @Getter private final int col;
 
-    MazeCreation(int row, int col){
+    MazeCreation(int row, int col, Maze maze){
         this.row = row;
         this.col = col;
         this.maze = new MazeCell[getRow()+2][getCol()+2];
 
-        createMaze();
+        createMaze(maze);
     }
 
-    private void createMazeCells(){
+    private void createMazeCells(Maze maze){
         for (int i = 0; i < getRow() + 2; ++i)
             for (int j = 0; j < getCol() + 2; ++j) {
-                this.maze[i][j] = new MazeCell();
+                this.maze[i][j] = new MazeCell(maze);
                 this.maze[i][j].getCoordination().setLocation(i, j);
             }
     }
@@ -49,8 +49,8 @@ public class MazeCreation{
         }
     }
 
-    private void createMaze(){
-        createMazeCells();
+    private void createMaze(Maze maze){
+        createMazeCells(maze);
         rdfsCreateMaze();
         findPossibleRoutes();
     }

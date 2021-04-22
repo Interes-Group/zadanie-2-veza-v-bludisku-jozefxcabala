@@ -16,7 +16,7 @@ public class ResetButton extends MyButton {
         System.out.println("You pressed RESET button!");
         this.maze.setReset(true);
         this.counterLabel.resetCounter();
-        this.maze.generateNewMaze();
+        this.maze.generateNewMaze(maze);
     }
 
 }

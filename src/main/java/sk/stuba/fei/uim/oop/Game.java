@@ -11,6 +11,7 @@ public class Game extends JFrame{
         setSize(500,500);
 
         Maze maze = new Maze(row, col);
+        maze.createMaze(maze.getRow(),maze.getCol(), maze);
 
         Menu menu = new Menu(maze);
         maze.setMenu(menu);

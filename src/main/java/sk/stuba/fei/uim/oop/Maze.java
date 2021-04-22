@@ -9,8 +9,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class Maze extends JPanel{
-    private final int row;
-    private final int col;
+    @Getter private final int row;
+    @Getter private final int col;
     private final Border line;
     @Getter private final JPanel mazePanel;
     @Getter private MazeCreation maze;
@@ -24,10 +24,11 @@ public class Maze extends JPanel{
         this.mazePanel = new JPanel();
         this.row = row;
         this.col = col;
-        createMaze(this.row,this.col);
-        this.mazePanel.setLayout(new GridLayout(this.maze.getRow()+2,this.maze.getCol()+2));
+
+        this.mazePanel.setLayout(new GridLayout(this.row+2,this.col+2));
         this.line = new LineBorder(Color.BLACK, 1, false);
         this.reset = false;
+
     }
 
     private void setEntrance(){
@@ -41,8 +42,8 @@ public class Maze extends JPanel{
         }
     }
 
-    private void createMaze(int row, int col){
-        this.maze = new MazeCreation(row, col);
+    public void createMaze(int row, int col, Maze maze){
+        this.maze = new MazeCreation(row, col, maze);
         setEntrance();
         setExit();
         findActualPosition();
@@ -80,7 +81,7 @@ public class Maze extends JPanel{
         }
     }
 
-    public void generateNewMaze(){
+    public void generateNewMaze(Maze maze){
         this.mazePanel.removeAll();
 
         if(!this.reset)
@@ -88,7 +89,7 @@ public class Maze extends JPanel{
         else
             this.reset = false;
 
-        createMaze(this.row, this.col);
+        createMaze(this.row, this.col, maze);
         showMaze();
     }
 

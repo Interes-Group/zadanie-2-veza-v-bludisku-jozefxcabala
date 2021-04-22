@@ -14,8 +14,9 @@ public class MazeCell extends JPanel{
     @Getter  private final Point coordination;
     @Getter  private final ArrayList<MazeCell> possibleRoutes;
     @Getter  private final MouseMoveListener mouseMove;
+    @Getter private final Maze maze;
 
-    public MazeCell(){
+    public MazeCell(Maze maze){
         super();
         setPassable(false);
         setFinish(false);
@@ -23,6 +24,7 @@ public class MazeCell extends JPanel{
         this.possibleRoutes = new ArrayList<>();
         this.coordination = new Point();
         this.pressed = false;
+        this.maze = maze;
 
         this.mouseMove = new MouseMoveListener();
         addMouseListener(this.mouseMove);

@@ -26,15 +26,19 @@ public class MouseMoveListener implements MouseListener {
                 System.out.println("Player was clicked again - is not marked");
             }
             else if(!panelPressed.isPlayer() && checkPlayer(panelPressed)){
-                for(int i = 0; i < panelPressed.getPossibleRoutes().size(); i++){
-                    if(panelPressed.getPossibleRoutes().get(i).isPlayer() && panelPressed.getPossibleRoutes().get(i).isPressed()) {
-                        panelPressed.getPossibleRoutes().get(i).setPlayer(false);
-                        panelPressed.getPossibleRoutes().get(i).setPressed(false);
-                        panelPressed.getPossibleRoutes().get(i).setBackground(Color.white);
+                if(!panelPressed.isFinish()) {
+                    for (int i = 0; i < panelPressed.getPossibleRoutes().size(); i++) {
+                        if (panelPressed.getPossibleRoutes().get(i).isPlayer() && panelPressed.getPossibleRoutes().get(i).isPressed()) {
+                            panelPressed.getPossibleRoutes().get(i).setPlayer(false);
+                            panelPressed.getPossibleRoutes().get(i).setPressed(false);
+                            panelPressed.getPossibleRoutes().get(i).setBackground(Color.white);
+                        }
                     }
+                    panelPressed.setPlayer(true);
+                    panelPressed.setBackground(Color.green);
                 }
-                panelPressed.setPlayer(true);
-                panelPressed.setBackground(Color.green);
+                else
+                    panelPressed.getMaze().generateNewMaze(panelPressed.getMaze());
             }
         }
     }

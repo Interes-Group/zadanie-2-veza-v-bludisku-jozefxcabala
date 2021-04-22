@@ -22,7 +22,7 @@ abstract public class MyButton extends JButton implements ActionListener {
         int x = this.maze.getActualPosition().x;
         int y = this.maze.getActualPosition().y;
         if(this.maze.getMaze().getMaze()[x][y].isPlayer() && this.maze.getMaze().getMaze()[x][y].isFinish()){
-            this.maze.generateNewMaze();
+            this.maze.generateNewMaze(maze);
         }
     }
 }
